@@ -2,14 +2,39 @@
 
 import os
 
-def _dir_exists(pathdir):
-    if os.path.exists(pathdir):
+#dir existance checks
+def _dir_does_exist(pathdir):
+    if os.path.isdir(pathdir):
         return True
+    else:
+        print ("dir does not exist: " + pathdir)
+        return False
+
+def _dir_does_not_exist(pathdir):
+    if not os.path.isdir(pathdir):
+        return True
+    else:
+        print ("dir does exist: " + pathdir)
+        return False
+
+#dir empty checks
+def _dir_is_empty(pathdir):
+    if _dir_does_exist(pathdir):
+        if not os.listdir(pathdir):
+            return True
+        else:
+            print ("dir is not empty: " + pathdir)
+            return False
     else:
         return False
 
-def _dir_doesnt_exist(pathdir):
-    if os.path.exists(pathdir):
-        return True
+def _dir_is_not_empty(pathdir):
+    if _dir_does_exist(pathdir):
+        if os.listdir(pathdir):
+            return True
+        else:
+            print ("dir is not empty: " + pathdir)
+            return False
     else:
         return False
+
