@@ -41,7 +41,7 @@ def _file_is_not_empty(pathfile):
 #file owner checks
 def _uid_does_own_file(pathfile):
     if _file_does_exist(pathfile):
-        if os.stat(pathfile).st_uid == os.getuid:
+        if os.stat(pathfile).st_uid == os.getuid():
             return True
         else:
             print ("uid does not own file: " + pathfile)
@@ -51,7 +51,7 @@ def _uid_does_own_file(pathfile):
 
 def _uid_does_not_own_file(pathfile):
     if _file_does_exist(pathfile):
-        if os.stat(pathfile).st_uid != os.getuid:
+        if os.stat(pathfile).st_uid != os.getuid():
             return True
         else:
             print ("uid does own file: " + pathfile)
@@ -60,11 +60,7 @@ def _uid_does_not_own_file(pathfile):
         return False
 
 
-#file perms
 #user owns file
-# group owns file
-# can read files
-
-
-#can read file
-#
+#group owns file
+#file perms
+#can read files
