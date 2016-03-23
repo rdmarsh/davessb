@@ -33,7 +33,7 @@ def _dir_is_not_empty(pathdir):
         if os.listdir(pathdir):
             return True
         else:
-            print ("dir is not empty: " + pathdir)
+            print ("dir is empty: " + pathdir)
             return False
     else:
         return False
