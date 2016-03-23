@@ -73,6 +73,24 @@ def main():
         return False
 
     print ()
+    print (" --- file is a file checks --- ")
+    print ()
+
+    testobject=('test_objects/file_is_not_a_file')
+    if dfm._file_is_not_a_file(testobject):
+        print("PASS: file is not a file: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    testobject=('test_objects/file_is_a_file')
+    if dfm._file_is_a_file(testobject):
+        print("PASS: file is a file: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    print ()
     print (" --- file contents checks --- ")
     print ()
 
@@ -119,3 +137,4 @@ if __name__ == "__main__":
     print ()
     print ("########################################")
     print ()
+
