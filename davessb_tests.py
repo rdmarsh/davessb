@@ -31,6 +31,24 @@ def main():
         return False
 
     print ()
+    print (" --- dir is a dir checks --- ")
+    print ()
+
+    testobject=('test_objects/dir_is_not_a_dir')
+    if ddm._dir_is_not_a_dir(testobject):
+        print("PASS: dir is not a dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    testobject=('test_objects/dir_is_a_dir')
+    if ddm._dir_is_a_dir(testobject):
+        print("PASS: dir is a dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    print ()
     print (" --- dir contents checks --- ")
     print ()
 
@@ -47,6 +65,25 @@ def main():
     else:
         print ("FAIL")
         return False
+
+    print ()
+    print (" --- dir owner checks --- ")
+    print ()
+
+    testobject=('test_objects/uid_does_own_dir')
+    if ddm._uid_does_own_dir(testobject):
+        print ("PASS: uid does own dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    testobject=('test_objects/uid_does_not_own_dir')
+    if ddm._uid_does_not_own_dir(testobject):
+        print ("PASS: uid does not own dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
 
     print ()
     print ("----------------------------------------")
