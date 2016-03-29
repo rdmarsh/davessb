@@ -82,6 +82,28 @@ def _uid_does_not_own_dir(pathdir):
     else:
         return False
 
+#dir group checks
+def _gid_does_own_dir(pathdir):
+    if _dir_is_a_dir(pathdir):
+        if os.stat(pathdir).st_gid == os.getgid():
+            return True
+        else:
+            print ("gid does not own dir: " + pathdir)
+            return False
+    else:
+        return False
+
+def _gid_does_not_own_dir(pathdir):
+    if _dir_is_a_dir(pathdir):
+        if os.stat(pathdir).st_gid != os.getgid():
+            return True
+        else:
+            print ("gid does own dir: " + pathdir)
+            return False
+    else:
+        return False
+
+
 
 #user owns dir
 #group owns dir

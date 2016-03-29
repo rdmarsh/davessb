@@ -84,6 +84,25 @@ def main():
         print ("FAIL")
         return False
 
+    print ()
+    print (" --- dir group checks --- ")
+    print ()
+
+    testobject=('test_objects/gid_does_own_dir')
+    if ddm._gid_does_own_dir(testobject):
+        print ("PASS: gid does own dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    testobject=('test_objects/gid_does_not_own_dir')
+    if ddm._gid_does_not_own_dir(testobject):
+        print ("PASS: gid does not own dir: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+
 
     print ()
     print ("----------------------------------------")
@@ -162,6 +181,25 @@ def main():
     else:
         print ("FAIL")
         return False
+
+    print ()
+    print (" --- file group checks --- ")
+    print ()
+
+    testobject=('test_objects/gid_does_own_file')
+    if dfm._gid_does_own_file(testobject):
+        print ("PASS: gid does own file: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
+    testobject=('test_objects/gid_does_not_own_file')
+    if dfm._gid_does_not_own_file(testobject):
+        print ("PASS: gid does not own file: " + testobject)
+    else:
+        print ("FAIL")
+        return False
+
 
 
 if __name__ == "__main__":

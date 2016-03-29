@@ -82,6 +82,28 @@ def _uid_does_not_own_file(pathfile):
     else:
         return False
 
+#file group checks
+def _gid_does_own_file(pathfile):
+    if _file_is_a_file(pathfile):
+        if os.stat(pathfile).st_gid == os.getgid():
+            return True
+        else:
+            print ("gid does not own file: " + pathfile)
+            return False
+    else:
+        return False
+
+def _gid_does_not_own_file(pathfile):
+    if _file_is_a_file(pathfile):
+        if os.stat(pathfile).st_gid != os.getgid():
+            return True
+        else:
+            print ("gid does own file: " + pathfile)
+            return False
+    else:
+        return False
+
+
 
 #user owns file
 #group owns file
