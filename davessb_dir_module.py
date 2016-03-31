@@ -1,104 +1,106 @@
 #!/usr/bin/env python3
 
 import os
+import davessb_common_module as dcm
 
-#dir existance checks
-def _dir_does_exist(pathdir):
-    if os.path.exists(pathdir):
+#object existance checks
+def _dir_does_exist(pathobject):
+    if dcm._exists(pathobject):
         return True
     else:
-        print ("dir does not exist: " + pathdir)
+        print ("dir does not exist: " + pathobject)
         return False
 
-def _dir_does_not_exist(pathdir):
-    if not os.path.exists(pathdir):
-        return True
+def _dir_does_not_exist(pathobject):
+    if not dcm._exists(pathobject):
+         return True
     else:
-        print ("dir does exist: " + pathdir)
-        return False
-
+         print ("dir does exist: " + pathobject)
+         return False
 
 #dir is a dir checks
-def _dir_is_a_dir(pathdir):
-    if _dir_does_exist(pathdir):
-        if os.path.isdir(pathdir):
+def _dir_is_a_dir(pathobject):
+    if _dir_does_exist(pathobject):
+        if os.path.isdir(pathobject):
             return True
         else:
-            print ("dir is not a dir: " + pathdir)
+            print ("dir is not a dir: " + pathobject)
             return False
     else:
         return False
 
-def _dir_is_not_a_dir(pathdir):
-    if _dir_does_exist(pathdir):
-        if not os.path.isdir(pathdir):
+def _dir_is_not_a_dir(pathobject):
+    if _dir_does_exist(pathobject):
+        if not os.path.isdir(pathobject):
             return True
         else:
-            print ("dir is a dir: " + pathdir)
+            print ("dir is a dir: " + pathobject)
             return False
     else:
         return False
 
 
 #dir empty checks
-def _dir_is_empty(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if not os.listdir(pathdir):
+def _dir_is_empty(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if not os.listdir(pathobject):
+        #if os.stat(pathobject).st_size == 0:
             return True
         else:
-            print ("dir is not empty: " + pathdir)
+            print ("dir is not empty: " + pathobject)
             return False
     else:
         return False
 
-def _dir_is_not_empty(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if os.listdir(pathdir):
+def _dir_is_not_empty(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if os.listdir(pathobject):
+        #if os.stat(pathobject).st_size > 0:
             return True
         else:
-            print ("dir is not empty: " + pathdir)
+            print ("dir is not empty: " + pathobject)
             return False
     else:
         return False
 
 #dir owner checks
-def _uid_does_own_dir(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if os.stat(pathdir).st_uid == os.getuid():
+def _uid_does_own_dir(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if os.stat(pathobject).st_uid == os.getuid():
             return True
         else:
-            print ("uid does not own dir: " + pathdir)
+            print ("uid does not own dir: " + pathobject)
             return False
     else:
         return False
 
-def _uid_does_not_own_dir(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if os.stat(pathdir).st_uid != os.getuid():
+def _uid_does_not_own_dir(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if os.stat(pathobject).st_uid != os.getuid():
             return True
         else:
-            print ("uid does own dir: " + pathdir)
+            print ("uid does own dir: " + pathobject)
             return False
     else:
         return False
 
 #dir group checks
-def _gid_does_own_dir(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if os.stat(pathdir).st_gid == os.getgid():
+def _gid_does_own_dir(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if os.stat(pathobject).st_gid == os.getgid():
             return True
         else:
-            print ("gid does not own dir: " + pathdir)
+            print ("gid does not own dir: " + pathobject)
             return False
     else:
         return False
 
-def _gid_does_not_own_dir(pathdir):
-    if _dir_is_a_dir(pathdir):
-        if os.stat(pathdir).st_gid != os.getgid():
+def _gid_does_not_own_dir(pathobject):
+    if _dir_is_a_dir(pathobject):
+        if os.stat(pathobject).st_gid != os.getgid():
             return True
         else:
-            print ("gid does own dir: " + pathdir)
+            print ("gid does own dir: " + pathobject)
             return False
     else:
         return False
