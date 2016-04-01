@@ -66,7 +66,7 @@ def _dir_is_not_empty(pathobject):
 #dir owner checks
 def _uid_does_own_dir(pathobject):
     if _dir_is_a_dir(pathobject):
-        if os.stat(pathobject).st_uid == os.getuid():
+        if dcm._uid_owns(pathobject):
             return True
         else:
             print ("uid does not own dir: " + pathobject)
@@ -76,7 +76,7 @@ def _uid_does_own_dir(pathobject):
 
 def _uid_does_not_own_dir(pathobject):
     if _dir_is_a_dir(pathobject):
-        if os.stat(pathobject).st_uid != os.getuid():
+        if not dcm._uid_owns(pathobject):
             return True
         else:
             print ("uid does own dir: " + pathobject)
@@ -87,7 +87,7 @@ def _uid_does_not_own_dir(pathobject):
 #dir group checks
 def _gid_does_own_dir(pathobject):
     if _dir_is_a_dir(pathobject):
-        if os.stat(pathobject).st_gid == os.getgid():
+        if dcm._gid_owns(pathobject):
             return True
         else:
             print ("gid does not own dir: " + pathobject)
@@ -97,7 +97,7 @@ def _gid_does_own_dir(pathobject):
 
 def _gid_does_not_own_dir(pathobject):
     if _dir_is_a_dir(pathobject):
-        if os.stat(pathobject).st_gid != os.getgid():
+        if not dcm._gid_owns(pathobject):
             return True
         else:
             print ("gid does own dir: " + pathobject)

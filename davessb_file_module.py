@@ -66,7 +66,7 @@ def _file_is_not_empty(pathobject):
 #file owner checks
 def _uid_does_own_file(pathobject):
     if _file_is_a_file(pathobject):
-        if os.stat(pathobject).st_uid == os.getuid():
+        if dcm._uid_owns(pathobject):
             return True
         else:
             print ("uid does not own file: " + pathobject)
@@ -76,7 +76,7 @@ def _uid_does_own_file(pathobject):
 
 def _uid_does_not_own_file(pathobject):
     if _file_is_a_file(pathobject):
-        if os.stat(pathobject).st_uid != os.getuid():
+        if not dcm._uid_owns(pathobject):
             return True
         else:
             print ("uid does own file: " + pathobject)
@@ -87,7 +87,7 @@ def _uid_does_not_own_file(pathobject):
 #file group checks
 def _gid_does_own_file(pathobject):
     if _file_is_a_file(pathobject):
-        if os.stat(pathobject).st_gid == os.getgid():
+        if dcm._gid_owns(pathobject):
             return True
         else:
             print ("gid does not own file: " + pathobject)
@@ -97,7 +97,7 @@ def _gid_does_own_file(pathobject):
 
 def _gid_does_not_own_file(pathobject):
     if _file_is_a_file(pathobject):
-        if os.stat(pathobject).st_gid != os.getgid():
+        if not dcm._gid_owns(pathobject):
             return True
         else:
             print ("gid does own file: " + pathobject)
