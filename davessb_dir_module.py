@@ -107,7 +107,5 @@ def _gid_does_not_own_dir(pathobject):
 
 
 
-#user owns dir
-#group owns dir
 #dir perms
 #can read dirs

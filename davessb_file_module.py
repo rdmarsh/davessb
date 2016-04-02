@@ -107,7 +107,5 @@ def _gid_does_not_own_file(pathobject):
 
 
 
-#user owns file
-#group owns file
 #file perms
 #can read files
