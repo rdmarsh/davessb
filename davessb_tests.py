@@ -5,6 +5,15 @@ import davessb_file_module as dfm
 
 import settings
 
+def dir_does_not_exist_check(pathobject):
+    if ddm._dir_does_not_exist(pathobject):
+        print("PASS: dir does not exist: " + pathobject)
+        return True
+    else:
+        print("FAIL: dir does not exist: " + pathobject)
+        return False
+
+
 def main():
 
     print ()
@@ -16,12 +25,15 @@ def main():
     print (" --- dir exisistance checks --- ")
     print ()
 
-    testobject=('test_objects/dir_does_not_exst')
-    if ddm._dir_does_not_exist(testobject):
-        print("PASS: dir does not exist: " + testobject)
-    else:
-        print ("FAIL")
-        return False
+    pathobject=('test_objects/dir_does_not_exst')
+    #create it
+    #test it
+    if dir_does_not_exist_check(pathobject):
+        print ("Test pass 👍")
+    #break it
+    #test it
+    #fix it
+    #test it
 
     testobject=('test_objects/dir_does_exist')
     if ddm._dir_does_exist(testobject):
