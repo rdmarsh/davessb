@@ -1,0 +1,27 @@
+digraph {
+    subgraph cluster_davessb_common_module {
+        _pass
+        _fail
+        _info
+        _exists
+        _uid_owns
+        _gid_owns
+    }
+
+    subgraph cluster_davessb_dir_module {
+        _dir_does_exist
+        _dir_does_not_exist
+        _dir_is_empty
+        _dir_is_not_empty
+        _uid_does_own_dir
+        _uid_does_not_own_dir
+        _gid_does_own_dir
+        _gid_does_not_own_dir
+    }
+
+    _exists -> _info
+    _uid_owns -> _exists
+    _gid_owns -> _exists
+
+    _dir_does_exist -> _exists
+}

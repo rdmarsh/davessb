@@ -1,106 +1,106 @@
 #!/usr/bin/env python3
 
+#only deepest tests get to say anything or return anything
+
 import os
 import davessb_common_module as dcm
 
 #object existance checks
-def _file_does_exist(pathobject):
-    if dcm._exists(pathobject):
+def _file_does_exist(pathobj):
+    if dcm._exists(pathobj):
+        dcm._fail("file does exist: " + pathobj)
         return True
     else:
-        print ("file does not exist: " + pathobject)
+        dcm._fail("file does not exist: " + pathobj)
         return False
 
-def _file_does_not_exist(pathobject):
-    if not dcm._exists(pathobject):
+def _file_does_not_exist(pathobj):
+    if not _file_does_exist(pathobj):
+         dcm._fail("file does not exist: " + pathobj)
          return True
     else:
-         print ("file does exist: " + pathobject)
+         dcm._fail("file does exist: " + pathobj)
          return False
 
 #file is a file checks
-def _file_is_a_file(pathobject):
-    if _file_does_exist(pathobject):
-        if os.path.isfile(pathobject):
+def _file_is_a_file(pathobj):
+    if _file_does_exist(pathobj):
+        if os.path.isfile(pathobj):
+            dcm._fail("file is a file: " + pathobj)
             return True
         else:
-            print ("file is not a file: " + pathobject)
+            dcm._fail("file is not a file: " + pathobj)
             return False
-    else:
-        return False
 
-def _file_is_not_a_file(pathobject):
-    if _file_does_exist(pathobject):
-        if not os.path.isfile(pathobject):
-            return True
-        else:
-            print ("file is a file: " + pathobject)
-            return False
+def _file_is_not_a_file(pathobj):
+    if not _file_does_exist(pathobj):
+        return True
+        dcm._fail("file is not a file: " + pathobj)
     else:
+        dcm._fail("file is a file: " + pathobj)
         return False
 
 
 #file empty checks
-def _file_is_empty(pathobject):
-    if _file_is_a_file(pathobject):
-        #if not os.listdir(pathobject):
-        if os.stat(pathobject).st_size == 0:
+def _file_is_empty(pathobj):
+    if _file_is_a_file(pathobj):
+        #if not os.listdir(pathobj):
+        if os.stat(pathobj).st_size == 0:
+            dcm._fail("file is empty: " + pathobj)
             return True
         else:
-            print ("file is not empty: " + pathobject)
+            dcm._fail("file is not empty: " + pathobj)
             return False
-    else:
-        return False
 
-def _file_is_not_empty(pathobject):
-    if _file_is_a_file(pathobject):
-        #if os.listdir(pathobject):
-        if os.stat(pathobject).st_size > 0:
+def _file_is_not_empty(pathobj):
+    if _file_is_a_file(pathobj):
+        #if os.listdir(pathobj):
+        if os.stat(pathobj).st_size > 0:
             return True
         else:
-            print ("file is not empty: " + pathobject)
+            dcm._fail("file is not empty: " + pathobj)
             return False
     else:
         return False
 
 #file owner checks
-def _uid_does_own_file(pathobject):
-    if _file_is_a_file(pathobject):
-        if dcm._uid_owns(pathobject):
+def _uid_does_own_file(pathobj):
+    if _file_is_a_file(pathobj):
+        if dcm._uid_owns(pathobj):
             return True
         else:
-            print ("uid does not own file: " + pathobject)
+            dcm._fail("uid does not own file: " + pathobj)
             return False
     else:
         return False
 
-def _uid_does_not_own_file(pathobject):
-    if _file_is_a_file(pathobject):
-        if not dcm._uid_owns(pathobject):
+def _uid_does_not_own_file(pathobj):
+    if _file_is_a_file(pathobj):
+        if not dcm._uid_owns(pathobj):
             return True
         else:
-            print ("uid does own file: " + pathobject)
+            dcm._fail("uid does own file: " + pathobj)
             return False
     else:
         return False
 
 #file group checks
-def _gid_does_own_file(pathobject):
-    if _file_is_a_file(pathobject):
-        if dcm._gid_owns(pathobject):
+def _gid_does_own_file(pathobj):
+    if _file_is_a_file(pathobj):
+        if dcm._gid_owns(pathobj):
             return True
         else:
-            print ("gid does not own file: " + pathobject)
+            dcm._fail("gid does not own file: " + pathobj)
             return False
     else:
         return False
 
-def _gid_does_not_own_file(pathobject):
-    if _file_is_a_file(pathobject):
-        if not dcm._gid_owns(pathobject):
+def _gid_does_not_own_file(pathobj):
+    if _file_is_a_file(pathobj):
+        if not dcm._gid_owns(pathobj):
             return True
         else:
-            print ("gid does own file: " + pathobject)
+            dcm._fail("gid does own file: " + pathobj)
             return False
     else:
         return False

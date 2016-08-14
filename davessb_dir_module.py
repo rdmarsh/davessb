@@ -1,106 +1,108 @@
 #!/usr/bin/env python3
 
+#only deepest tests get to say anything or return anything
+#only top checks are not infos
+#negative checks call positive with 'nots', don't redo checks
+
+
 import os
 import davessb_common_module as dcm
 
-#object existance checks
-def _dir_does_exist(pathobject):
-    if dcm._exists(pathobject):
+#dir exists and is a correct object checks
+def _dir_does_exist(pathobj):
+    if dcm._exists(pathobj):
+        if os.path.isdir(pathobj):
+            _bool=' '
+            dcm._info("dir is" + _bool + "a dir: " + pathobj)
+            return True
+        else:
+            _bool=' not '
+            dcm._info("dir is" + _bool + "a dir: " + pathobj)
+            return False
+    else:
+        return False
+
+def _dir_does_not_exist(pathobj):
+    if not _dir_does_exist(pathobj):
         return True
     else:
-        print ("dir does not exist: " + pathobject)
         return False
-
-def _dir_does_not_exist(pathobject):
-    if not dcm._exists(pathobject):
-         return True
-    else:
-         print ("dir does exist: " + pathobject)
-         return False
-
-#dir is a dir checks
-def _dir_is_a_dir(pathobject):
-    if _dir_does_exist(pathobject):
-        if os.path.isdir(pathobject):
-            return True
-        else:
-            print ("dir is not a dir: " + pathobject)
-            return False
-    else:
-        return False
-
-def _dir_is_not_a_dir(pathobject):
-    if _dir_does_exist(pathobject):
-        if not os.path.isdir(pathobject):
-            return True
-        else:
-            print ("dir is a dir: " + pathobject)
-            return False
-    else:
-        return False
-
 
 #dir empty checks
-def _dir_is_empty(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if not os.listdir(pathobject):
-        #if os.stat(pathobject).st_size == 0:
+def _dir_is_empty(pathobj):
+    if _dir_does_exist(pathobj):
+        if not os.listdir(pathobj):
+        #if os.stat(pathobj).st_size == 0:
+            _bool=' '
+            dcm._info("dir is" + _bool + "empty: " + pathobj)
             return True
         else:
-            print ("dir is not empty: " + pathobject)
+            _bool=' not '
+            dcm._info("dir is" + _bool + "empty: " + pathobj)
             return False
-    else:
-        return False
 
-def _dir_is_not_empty(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if os.listdir(pathobject):
-        #if os.stat(pathobject).st_size > 0:
+def _dir_is_not_empty(pathobj):
+    if _dir_does_exist(pathobj):
+        if os.listdir(pathobj):
+        #if os.stat(pathobj).st_size == 0:
+            _bool=' not '
+            dcm._info("dir is" + _bool + "empty: " + pathobj)
             return True
         else:
-            print ("dir is not empty: " + pathobject)
+            _bool=' '
+            dcm._info("dir is" + _bool + "empty: " + pathobj)
             return False
-    else:
-        return False
 
 #dir owner checks
-def _uid_does_own_dir(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if dcm._uid_owns(pathobject):
+def _uid_does_own_dir(pathobj):
+    if _dir_does_exist(pathobj):
+        if dcm._uid_owns(pathobj):
+            _bool=' '
+            dcm._info("uid does" + _bool + "own dir: " + pathobj)
             return True
         else:
-            print ("uid does not own dir: " + pathobject)
+            _bool=' not '
+            dcm._info("uid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
 
-def _uid_does_not_own_dir(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if not dcm._uid_owns(pathobject):
+def _uid_does_not_own_dir(pathobj):
+    if not _uid_does_own_dir(pathobj):
+        if not dcm._uid_owns(pathobj):
+            _bool=' not '
+            dcm._info("uid does" + _bool + "own dir: " + pathobj)
             return True
         else:
-            print ("uid does own dir: " + pathobject)
+            _bool=' '
+            dcm._info("uid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
 
 #dir group checks
-def _gid_does_own_dir(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if dcm._gid_owns(pathobject):
+def _gid_does_own_dir(pathobj):
+    if _dir_is_a_dir(pathobj):
+        if dcm._gid_owns(pathobj):
+            _bool=''
+            dcm._info("gid does " + _bool + " own dir: " + pathobj)
             return True
         else:
-            print ("gid does not own dir: " + pathobject)
+            _bool=''
+            dcm._info("gid does " + _bool + " own dir: " + pathobj)
             return False
     else:
         return False
 
-def _gid_does_not_own_dir(pathobject):
-    if _dir_is_a_dir(pathobject):
-        if not dcm._gid_owns(pathobject):
+def _gid_does_not_own_dir(pathobj):
+    if _dir_is_a_dir(pathobj):
+        if not dcm._gid_owns(pathobj):
+            _bool=''
+            dcm._info("gid does " + _bool + " own dir: " + pathobj)
             return True
         else:
-            print ("gid does own dir: " + pathobject)
+            _bool=''
+            dcm._info("gid does " + _bool + " own dir: " + pathobj)
             return False
     else:
         return False
