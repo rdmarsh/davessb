@@ -7,21 +7,14 @@ import davessb_file_module as dfm
 import os
 import settings
 
-def main():
-
-    print ()
-    print ()
-    print ("----------------------------------------")
-    print (" object checks")
-    print ("----------------------------------------")
-    print ()
-
+def _object_exisistance_checks():
+    #these are special and should never be called directly
     print ()
     print (" --- object exisistance checks --- ")
     print ()
 
-    #these are special and should never be called directly
     print (" positive check ")
+    print ()
 
     testobj='test_objects/_exists'
 
@@ -36,6 +29,7 @@ def main():
 
     print ()
     print (" negative check ")
+    print ()
 
     testobj='test_objects/_exists_not'
 
@@ -48,11 +42,14 @@ def main():
         msg="object does" + _bool + "exist: " + testobj
         dcm._fail(msg)
 
+def _object_uid_checks():
+    #these are special and should never be called directly
     print ()
     print (" --- object uid checks --- ")
     print ()
 
     print (" positive check ")
+    print ()
 
     testobj='test_objects/_uid_owns'
 
@@ -67,6 +64,7 @@ def main():
 
     print ()
     print (" negative check ")
+    print ()
 
     testobj='test_objects/_uid_owns_not'
 
@@ -79,11 +77,14 @@ def main():
         msg="object uid does" + _bool + "own: " + testobj
         dcm._fail(failmsg)
 
+def _object_gid_checks():
+    #these are special and should never be called directly
     print ()
     print (" --- object gid checks --- ")
     print ()
 
     print (" positive check ")
+    print ()
 
     testobj='test_objects/_gid_owns'
 
@@ -98,6 +99,7 @@ def main():
 
     print ()
     print (" negative check ")
+    print ()
 
     testobj='test_objects/_gid_owns_not'
 
@@ -110,35 +112,61 @@ def main():
         msg="object gid does" + _bool + "own: " + testobj
         dcm._fail(failmsg)
 
+def _dir_exisistance_and_dir_checks():
+    print ()
+    print (" --- dir exisistance and is a dir checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_dir_does_exst'
+
+    if ddm._dir_does_exist(testobj):
+        _bool=' '
+        msg="dir does" + _bool + " exist: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="dir does" + _bool + " exist: " + testobj
+        dcm._fail(msg)
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_dir_does_not_exist'
+
+    if ddm._dir_does_not_exist(testobj):
+        _bool=' '
+        msg="dir does" + _bool + " exist: " + testobj
+        dcm._fail(msg)
+    else:
+        _bool=' not '
+        msg="dir does" + _bool + " exist: " + testobj
+        dcm._fail(msg)
+
+
+def main():
+
+    print ()
+    print ()
+    print ("----------------------------------------")
+    print (" object checks")
+    print ("----------------------------------------")
+    print ()
+
+    _object_exisistance_checks()
+    _object_uid_checks()
+    _object_gid_checks()
+
     print ()
     print ("----------------------------------------")
     print (" dir checks")
     print ("----------------------------------------")
     print ()
 
-    print ()
-    print (" --- dir exisistance and is a dir checks --- ")
-    print ()
-
-    testobj='test_objects/_dir_does_exst'
-    passmsg='dir does exist: ' + testobj
-    failmsg='dir does not exist: ' + testobj
-
-    if ddm._dir_does_exist(testobj):
-        dcm._pass(passmsg)
-    else:
-        dcm._fail(failmsg)
-
-    print ()
-
-    testobj='test_objects/_dir_does_not_exist'
-    passmsg='dir does not exist: ' + testobj
-    failmsg='dir does exist: ' + testobj
-
-    if ddm._dir_does_not_exist(testobj):
-        dcm._pass(passmsg)
-    else:
-        dcm._fail(failmsg)
+    _dir_exisistance_and_dir_checks()
 
     print ()
     print (" --- dir uid checks --- ")
@@ -177,11 +205,13 @@ def main():
     if ddm._gid_does_own_dir(testobj):
         dcm._pass("gid does own dir: " + testobj)
     else:
+        dcm._fail("gid does not own dir: " + testobj)
 
     testobj=('test_objects/gid_does_not_own_dir')
     if ddm._gid_does_not_own_dir(testobj):
         dcm._pass("gid does not own dir: " + testobj)
     else:
+        dcm._pass("gid does own dir: " + testobj)
 
     print ()
     print (" --- dir contents checks --- ")
@@ -222,11 +252,13 @@ def main():
     if dfm._file_does_not_exist(testobj):
         dcm._pass("file does not exist: " + testobj)
     else:
+        dcm._fail("file does not exist: " + testobj)
 
     testobj=('test_objects/file_does_exist')
     if dfm._file_does_exist(testobj):
         dcm._pass("file does exist: " + testobj)
     else:
+        dcm._fail("file does exist: " + testobj)
 
     print ()
     print (" --- file is a file checks --- ")
@@ -236,11 +268,13 @@ def main():
     if dfm._file_is_not_a_file(testobj):
         dcm._pass("file is not a file: " + testobj)
     else:
+        dcm._pass("file is a file: " + testobj)
 
     testobj=('test_objects/file_is_a_file')
     if dfm._file_is_a_file(testobj):
         dcm._pass("file is a file: " + testobj)
     else:
+        dcm._pass("file is not a file: " + testobj)
 
     print ()
     print (" --- file contents checks --- ")
@@ -250,11 +284,13 @@ def main():
     if dfm._file_is_empty(testobj):
         dcm._pass("file is empty: " + testobj)
     else:
+        dcm._pass("file is empty: " + testobj)
 
     testobj=('test_objects/file_is_not_empty')
     if dfm._file_is_not_empty(testobj):
         dcm._pass("file is not empty: " + testobj)
     else:
+        dcm._pass("file is not empty: " + testobj)
 
     print ()
     print (" --- file owner checks --- ")
@@ -264,11 +300,13 @@ def main():
     if dfm._uid_does_own_file(testobj):
         dcm._pass("uid does own file: " + testobj)
     else:
+        dcm._pass("uid does not own file: " + testobj)
 
     testobj=('test_objects/uid_does_not_own_file')
     if dfm._uid_does_not_own_file(testobj):
         dcm._pass("uid does not own file: " + testobj)
     else:
+        dcm._pass("uid does not own file: " + testobj)
 
     print ()
     print (" --- file group checks --- ")
@@ -278,11 +316,13 @@ def main():
     if dfm._gid_does_own_file(testobj):
         dcm._pass("gid does own file: " + testobj)
     else:
+        dcm._pass("gid does not own file: " + testobj)
 
     testobj=('test_objects/gid_does_not_own_file')
     if dfm._gid_does_not_own_file(testobj):
         dcm._pass("gid does not own file: " + testobj)
     else:
+        dcm._pass("gid does  own file: " + testobj)
 
 
 if __name__ == "__main__":

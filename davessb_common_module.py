@@ -6,15 +6,25 @@
 
 import os
 
-#messages
-def _pass(msg):
-    print("💚  [PASS]: " + msg)
+class bcolors:
+    FAIL = '\033[31m'
+    PASS = '\033[32m'
+    WARN = '\033[33m'
+    INFO = '\033[34m'
+    ENDC = '\033[0m'
 
+#messages
 def _fail(msg):
-    print("💔  [FAIL]: " + msg)
+    print("💔  " + bcolors.FAIL + "[FAIL]" + bcolors.ENDC + ": " + msg)
+
+def _pass(msg):
+    print("💚  " + bcolors.PASS + "[PASS]" + bcolors.ENDC + ": " + msg)
+
+def _warn(msg):
+    print("💛  " + bcolors.WARN + "[WARN]" + bcolors.ENDC + ": " + msg)
 
 def _info(msg):
-    print("💛  [INFO]: " + msg)
+    print("💙  " + bcolors.INFO + "[INFO]" + bcolors.ENDC + ": " + msg)
 
 #object existance checks
 def _exists(pathobj):
@@ -24,7 +34,7 @@ def _exists(pathobj):
         return True
     else:
         _bool=' not '
-        _info("object does" + _bool + "exist: " + pathobj)
+        _warn("object does" + _bool + "exist: " + pathobj)
         return False
 
 #object user owner checks
@@ -36,7 +46,7 @@ def _uid_owns(pathobj):
             return True
         else:
             _bool=' not '
-            _info("uid does" + _bool + "own object: " + pathobj)
+            _warn("uid does" + _bool + "own object: " + pathobj)
             return False
 
 #object group owner checks
@@ -48,6 +58,6 @@ def _gid_owns(pathobj):
             return True
         else:
             _bool=' not '
-            _info("gid does " + _bool + " own object: " + pathobj)
+            _warn("gid does " + _bool + " own object: " + pathobj)
             return False
 
