@@ -61,3 +61,4 @@ def _gid_owns(pathobj):
             _warn("gid does " + _bool + " own object: " + pathobj)
             return False
 
+#symbolic links (own module?)

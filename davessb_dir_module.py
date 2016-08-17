@@ -17,7 +17,7 @@ def _dir_does_exist(pathobj):
             return True
         else:
             _bool=' not '
-            dcm._info("dir is" + _bool + "a dir: " + pathobj)
+            dcm._warn("dir is" + _bool + "a dir: " + pathobj)
             return False
     else:
         return False
@@ -38,7 +38,7 @@ def _dir_is_empty(pathobj):
             return True
         else:
             _bool=' not '
-            dcm._info("dir is" + _bool + "empty: " + pathobj)
+            dcm._warn("dir is" + _bool + "empty: " + pathobj)
             return False
 
 def _dir_is_not_empty(pathobj):
@@ -50,7 +50,7 @@ def _dir_is_not_empty(pathobj):
             return True
         else:
             _bool=' '
-            dcm._info("dir is" + _bool + "empty: " + pathobj)
+            dcm._warn("dir is" + _bool + "empty: " + pathobj)
             return False
 
 #dir owner checks
@@ -62,7 +62,7 @@ def _uid_does_own_dir(pathobj):
             return True
         else:
             _bool=' not '
-            dcm._info("uid does" + _bool + "own dir: " + pathobj)
+            dcm._warn("uid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
@@ -75,39 +75,38 @@ def _uid_does_not_own_dir(pathobj):
             return True
         else:
             _bool=' '
-            dcm._info("uid does" + _bool + "own dir: " + pathobj)
+            dcm._warn("uid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
 
 #dir group checks
 def _gid_does_own_dir(pathobj):
-    if _dir_is_a_dir(pathobj):
+    if _dir_does_exist(pathobj):
         if dcm._gid_owns(pathobj):
             _bool=''
-            dcm._info("gid does " + _bool + " own dir: " + pathobj)
+            dcm._info("gid does" + _bool + "own dir: " + pathobj)
             return True
         else:
-            _bool=''
-            dcm._info("gid does " + _bool + " own dir: " + pathobj)
+            _bool=' not '
+            dcm._warn("gid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
 
 def _gid_does_not_own_dir(pathobj):
-    if _dir_is_a_dir(pathobj):
+    if _dir_does_exist(pathobj):
         if not dcm._gid_owns(pathobj):
-            _bool=''
-            dcm._info("gid does " + _bool + " own dir: " + pathobj)
+            _bool=' not '
+            dcm._info("gid does" + _bool + "own dir: " + pathobj)
             return True
         else:
-            _bool=''
-            dcm._info("gid does " + _bool + " own dir: " + pathobj)
+            _bool=' '
+            dcm._warn("gid does" + _bool + "own dir: " + pathobj)
             return False
     else:
         return False
 
-
-
 #dir perms
 #can read dirs
+

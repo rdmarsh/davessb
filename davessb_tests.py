@@ -55,11 +55,11 @@ def _object_uid_checks():
 
     if dcm._uid_owns(testobj):
         _bool=' '
-        msg="object uid does" + _bool + "own: " + testobj
+        msg="uid does" + _bool + "own object: " + testobj
         dcm._pass(msg)
     else:
         _bool=' not '
-        msg="object uid does" + _bool + "own: " + testobj
+        msg="uid does" + _bool + "own object: " + testobj
         dcm._fail(msg)
 
     print ()
@@ -70,11 +70,11 @@ def _object_uid_checks():
 
     if not dcm._uid_owns(testobj):
         _bool=' not '
-        msg="object uid does" + _bool + "own: " + testobj
+        msg="uid does" + _bool + "own object: " + testobj
         dcm._pass(msg)
     else:
         _bool=' '
-        msg="object uid does" + _bool + "own: " + testobj
+        msg="uid does" + _bool + "own object: " + testobj
         dcm._fail(failmsg)
 
 def _object_gid_checks():
@@ -90,11 +90,11 @@ def _object_gid_checks():
 
     if dcm._gid_owns(testobj):
         _bool=' '
-        msg="object gid does" + _bool + "own: " + testobj
+        msg="gid does" + _bool + "own object: " + testobj
         dcm._pass(msg)
     else:
         _bool=' not '
-        msg="object gid does" + _bool + "own: " + testobj
+        msg="gid does" + _bool + "own object: " + testobj
         dcm._fail(msg)
 
     print ()
@@ -124,11 +124,11 @@ def _dir_exisistance_and_dir_checks():
 
     if ddm._dir_does_exist(testobj):
         _bool=' '
-        msg="dir does" + _bool + " exist: " + testobj
+        msg="dir does" + _bool + "exist: " + testobj
         dcm._pass(msg)
     else:
         _bool=' not '
-        msg="dir does" + _bool + " exist: " + testobj
+        msg="dir does" + _bool + "exist: " + testobj
         dcm._fail(msg)
 
     print ()
@@ -137,15 +137,82 @@ def _dir_exisistance_and_dir_checks():
 
     testobj='test_objects/_dir_does_not_exist'
 
-    if ddm._dir_does_not_exist(testobj):
-        _bool=' '
-        msg="dir does" + _bool + " exist: " + testobj
-        dcm._fail(msg)
-    else:
+    if not ddm._dir_does_exist(testobj):
         _bool=' not '
-        msg="dir does" + _bool + " exist: " + testobj
+        msg="dir does" + _bool + "exist: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' '
+        msg="dir does" + _bool + "exist: " + testobj
         dcm._fail(msg)
 
+def _dir_uid_checks():
+    print ()
+    print (" --- dir uid checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_uid_does_own_dir'
+
+    if ddm._uid_does_own_dir(testobj):
+        _bool=' not '
+        msg="uid does" + _bool + "own dir: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="uid does" + _bool + "own dir: " + testobj
+        dcm._fail(msg)
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_uid_does_not_own_dir'
+
+    if not ddm._uid_does_own_dir(testobj):
+        _bool=' not '
+        msg="uid does" + _bool + "own dir: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="uid does" + _bool + "own dir: " + testobj
+        dcm._fail(msg)
+
+def _dir_gid_checks():
+    print ()
+    print (" --- dir gid checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_gid_does_own_dir'
+
+    if ddm._gid_does_own_dir(testobj):
+        _bool=' not '
+        msg="gid does" + _bool + "own dir: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="gid does" + _bool + "own dir: " + testobj
+        dcm._fail(msg)
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_gid_does_not_own_dir'
+
+    if not ddm._gid_does_own_dir(testobj):
+        _bool=' not '
+        msg="gid does" + _bool + "own dir: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="gid does" + _bool + "own dir: " + testobj
+        dcm._fail(msg)
 
 def main():
 
@@ -167,51 +234,8 @@ def main():
     print ()
 
     _dir_exisistance_and_dir_checks()
-
-    print ()
-    print (" --- dir uid checks --- ")
-    print ()
-
-    pos_test_obj='test_objects/uid_does_own_dir'
-    neg_test_obj='test_objects/uid_does_own_dir'
-
-    passmsg='uid_does_own_dirot exist: ' + testobj
-    failmsg='dir does exist: ' + testobj
-
-    testnme='uid_does_not_own_dir'
-    testobj='test_objects/' + testnme
-    passmsg=testnme + ': ' + testobj
-    failmsg='dir not owned by uid: ' + testobj
-
-    if ddm._uid_does_own_dir(testobj):
-        dcm._pass(passmsg)
-    else:
-        dcm._fail(failmsg)
-
-    testobj='test_objects/uid_does_not_own_dir'
-    passmsg='dir not owned by uid: ' + testobj
-    failmsg='dir owned by uid: ' + testobj
-
-    if ddm._uid_does_not_own_dir(testobj):
-        dcm._pass(passmsg)
-    else:
-        dcm._fail(failmsg)
-
-    print ()
-    print (" --- dir gid checks --- ")
-    print ()
-
-    testobj=('test_objects/gid_does_own_dir')
-    if ddm._gid_does_own_dir(testobj):
-        dcm._pass("gid does own dir: " + testobj)
-    else:
-        dcm._fail("gid does not own dir: " + testobj)
-
-    testobj=('test_objects/gid_does_not_own_dir')
-    if ddm._gid_does_not_own_dir(testobj):
-        dcm._pass("gid does not own dir: " + testobj)
-    else:
-        dcm._pass("gid does own dir: " + testobj)
+    _dir_uid_checks()
+    _dir_gid_checks()
 
     print ()
     print (" --- dir contents checks --- ")
