@@ -4,22 +4,20 @@
 #only top checks are not infos
 #negative checks call positive with 'nots', don't redo checks
 
-
 import os
+
 import davessb_common_module as dcm
+import davessb_object_module as dom
 
 #dir exists and is a correct object checks
 def _dir_does_exist(pathobj):
-    if dcm._exists(pathobj):
-        if os.path.isdir(pathobj):
-            _bool=' '
-            dcm._info("dir is" + _bool + "a dir: " + pathobj)
-            return True
-        else:
-            _bool=' not '
-            dcm._warn("dir is" + _bool + "a dir: " + pathobj)
-            return False
+    if dom._exists(pathobj) and dom._isdir(pathobj):
+        _bool=' '
+        dcm._info("dir is" + _bool + "a dir: " + pathobj)
+        return True
     else:
+        _bool=' not '
+        dcm._warn("dir is" + _bool + "a dir: " + pathobj)
         return False
 
 def _dir_does_not_exist(pathobj):
@@ -69,7 +67,7 @@ def _uid_does_own_dir(pathobj):
 
 def _uid_does_not_own_dir(pathobj):
     if not _uid_does_own_dir(pathobj):
-        if not dcm._uid_owns(pathobj):
+        if not dom._uid_owns(pathobj):
             _bool=' not '
             dcm._info("uid does" + _bool + "own dir: " + pathobj)
             return True
@@ -83,7 +81,7 @@ def _uid_does_not_own_dir(pathobj):
 #dir group checks
 def _gid_does_own_dir(pathobj):
     if _dir_does_exist(pathobj):
-        if dcm._gid_owns(pathobj):
+        if dom._gid_owns(pathobj):
             _bool=''
             dcm._info("gid does" + _bool + "own dir: " + pathobj)
             return True
@@ -96,7 +94,7 @@ def _gid_does_own_dir(pathobj):
 
 def _gid_does_not_own_dir(pathobj):
     if _dir_does_exist(pathobj):
-        if not dcm._gid_owns(pathobj):
+        if not dom._gid_owns(pathobj):
             _bool=' not '
             dcm._info("gid does" + _bool + "own dir: " + pathobj)
             return True

@@ -3,11 +3,13 @@
 #only deepest tests get to say anything or return anything
 
 import os
+
 import davessb_common_module as dcm
+import davessb_object_module as dom
 
 #object existance checks
 def _file_does_exist(pathobj):
-    if dcm._exists(pathobj):
+    if dom._exists(pathobj):
         dcm._fail("file does exist: " + pathobj)
         return True
     else:
@@ -66,7 +68,7 @@ def _file_is_not_empty(pathobj):
 #file owner checks
 def _uid_does_own_file(pathobj):
     if _file_is_a_file(pathobj):
-        if dcm._uid_owns(pathobj):
+        if dom._uid_owns(pathobj):
             return True
         else:
             dcm._fail("uid does not own file: " + pathobj)
@@ -76,7 +78,7 @@ def _uid_does_own_file(pathobj):
 
 def _uid_does_not_own_file(pathobj):
     if _file_is_a_file(pathobj):
-        if not dcm._uid_owns(pathobj):
+        if not dom._uid_owns(pathobj):
             return True
         else:
             dcm._fail("uid does own file: " + pathobj)
@@ -87,7 +89,7 @@ def _uid_does_not_own_file(pathobj):
 #file group checks
 def _gid_does_own_file(pathobj):
     if _file_is_a_file(pathobj):
-        if dcm._gid_owns(pathobj):
+        if dom._gid_owns(pathobj):
             return True
         else:
             dcm._fail("gid does not own file: " + pathobj)
@@ -97,7 +99,7 @@ def _gid_does_own_file(pathobj):
 
 def _gid_does_not_own_file(pathobj):
     if _file_is_a_file(pathobj):
-        if not dcm._gid_owns(pathobj):
+        if not dom._gid_owns(pathobj):
             return True
         else:
             dcm._fail("gid does own file: " + pathobj)
