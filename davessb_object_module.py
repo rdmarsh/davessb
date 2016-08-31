@@ -9,78 +9,88 @@ import os
 import davessb_common_module as dcm
 
 #object existance check, normally not called directly
-def _exists(pathobj):
-    if os.path.exists(pathobj):
+def _exists(obj):
+    if os.path.exists(obj):
         _bool=' '
-        dcm._info("object does" + _bool + "exist: " + pathobj)
+        msg="object does" + _bool + "exist: " + obj
+        dcm._info(msg)
         return True
     else:
         _bool=' not '
-        dcm._info("object does" + _bool + "exist: " + pathobj)
+        msg="object does" + _bool + "exist: " + obj
+        dcm._info(msg)
         return False
 
 #object type check, normally not called directly
-def _isdir(pathobj):
-    if os.path.isdir(pathobj):
+def _isdir(obj):
+    if os.path.isdir(obj):
         _bool=' '
-        dcm._info("object is" + _bool + "a dir: " + pathobj)
+        msg="object is" + _bool + "a dir: " + obj
+        dcm._info(msg)
         return True
     else:
         _bool=' not '
-        dcm._info("object is" + _bool + "a dir: " + pathobj)
+        msg="object is" + _bool + "a dir: " + obj
+        dcm._info(msg)
         return False
 
 #object type check, normally not called directly
-def _isfile(pathobj):
-    if os.path.isfile(pathobj):
+def _isfile(obj):
+    if os.path.isfile(obj):
         _bool=' '
-        dcm._info("object is" + _bool + "a file: " + pathobj)
+        msg="object is" + _bool + "a file: " + obj
+        dcm._info(msg)
         return True
     else:
         _bool=' not '
-        dcm._info("object is" + _bool + "a file: " + pathobj)
-        return False
-
-#object type check, normally not called directly
-def _islink(pathobj):
-    if os.path.islink(pathobj):
-        _bool=' '
-        dcm._info("object is" + _bool + "a link: " + pathobj)
-        return True
-    else:
-        _bool=' not '
-        dcm._info("object is" + _bool + "a link: " + pathobj)
+        msg="object is" + _bool + "a file: " + obj
+        dcm._info(msg)
         return False
 
 #todo, call below and test existence or lack of it
-#def _dir_exists(pathobj):
+#def _dir_exists(obj):
 #def _file_exists
-#def _link_exists
-
 
 #object user owner checks
-def _uid_owns(pathobj):
-    if _exists(pathobj):
-        if os.stat(pathobj).st_uid == os.getuid():
-            _bool=' '
-            dcm._info("uid does" + _bool + "own object: " + pathobj)
-            return True
-        else:
-            _bool=' not '
-            _warn("uid does" + _bool + "own object: " + pathobj)
-            return False
+def _uid_owns(obj):
+    if os.stat(obj).st_uid == os.getuid():
+        _bool=' '
+        msg="object is" + _bool + "owned by uid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' not '
+        msg="object is" + _bool + "owned by uid: " + obj
+        dcm._info(msg)
+        return False
 
 #object group owner checks
-def _gid_owns(pathobj):
-    if _exists(pathobj):
-        if os.stat(pathobj).st_gid == os.getgid():
-            _bool=' '
-            dcm._info("gid does" + _bool + "own object: " + pathobj)
-            return True
-        else:
-            _bool=' not '
-            _warn("gid does " + _bool + " own object: " + pathobj)
-            return False
+def _gid_owns(obj):
+    if os.stat(obj).st_gid == os.getgid():
+        _bool=' '
+        msg="object is" + _bool + "owned by gid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' not '
+        msg="object is" + _bool + "owned by gid: " + obj
+        dcm._info(msg)
+        return False
+
+#object user and group owner checks
+def _id_owns(obj):
+    if _uid_owns(obj) and _gid_owns(obj):
+        _bool=' '
+        _junct=' and '
+        msg="object is" + _bool + "owned by uid" + _junct + "gid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' not '
+        _junct=' or '
+        msg="object is" + _bool + "owned by uid" + _junct + "gid: " + obj
+        dcm._info(msg)
+        return False
 
 #
 # os.getegid

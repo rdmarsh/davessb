@@ -4,27 +4,37 @@
 #only top checks are not infos
 #negative checks call positive with 'nots', don't redo checks
 
-class bcolors:
-    FAIL = '\033[31m'
-    PASS = '\033[32m'
-    WARN = '\033[33m'
-    INFO = '\033[34m'
-    HALT = '\033[4;31m'
+class msgends:
+    INFO = '💙  \033[34m[INFO]: '
+    PASS = '💚  \033[32m[PASS]: '
+    WARN = '💛  \033[33m[WARN]: '
+    FAIL = '❤️  \033[31m[FAIL]: '
+    HALT = '💔  \033[4;31m[HALT]: '
     ENDC = '\033[0m'
 
 #messages
-def _fail(msg):
-    print("❤️  " + bcolors.FAIL + "[FAIL]: " + msg + bcolors.ENDC)
+def _info(msg=''):
+    print(msgends.INFO + msg + msgends.ENDC)
+    if not msg:
+        _warn('no text provided for previous INFO message')
 
-def _pass(msg):
-    print("💚  " + bcolors.PASS + "[PASS]: " + msg + bcolors.ENDC)
+def _pass(msg=''):
+    print(msgends.PASS + msg + msgends.ENDC)
+    if not msg:
+        _warn('no text provided for previous PASS message')
 
-def _warn(msg):
-    print("💛  " + bcolors.WARN + "[WARN]: " + msg + bcolors.ENDC)
+def _warn(msg=''):
+    print(msgends.WARN + msg + msgends.ENDC)
+    if not msg:
+        _warn('no text provided for previous WARN message')
 
-def _info(msg):
-    print("💙  " + bcolors.INFO + "[INFO]: " + msg + bcolors.ENDC)
+def _fail(msg=''):
+    print(msgends.FAIL + msg + msgends.ENDC)
+    if not msg:
+        _warn('no text provided for previous FAIL message')
 
-def _halt(msg):
-    print("💔  " + bcolors.HALT + "[HALT]: " + msg + bcolors.ENDC)
+def _halt(msg=''):
+    print(msgends.HALT + msg + msgends.ENDC)
+    if not msg:
+        _warn('no text provided for previous HALT message')
 
