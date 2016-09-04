@@ -11,7 +11,7 @@ import davessb_object_module as dom
 
 #dir exists and is a correct object checks
 def _dir_does_exist(pathobj):
-    if dom._exists(pathobj) and dom._isdir(pathobj):
+    if (dom._exists(pathobj) and dom._isdir(pathobj)):
         _bool=' '
         dcm._info("dir is" + _bool + "a dir: " + pathobj)
         return True

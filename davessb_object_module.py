@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 #only deepest tests get to say anything or return anything
-#only top checks are not infos
 #negative checks call positive with 'nots', don't redo checks
 
 import os
 
 import davessb_common_module as dcm
 
-#object existance check, normally not called directly
+#object existence check, normally not called directly
 def _exists(obj):
     if os.path.exists(obj):
         _bool=' '
@@ -17,6 +16,19 @@ def _exists(obj):
         return True
     else:
         _bool=' not '
+        msg="object does" + _bool + "exist: " + obj
+        dcm._info(msg)
+        return False
+
+#object not existence check, normally not called directly
+def _not_exists(obj):
+    if not _exists(obj):
+        _bool=' not '
+        msg="object does" + _bool + "exist: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
         msg="object does" + _bool + "exist: " + obj
         dcm._info(msg)
         return False
@@ -34,6 +46,19 @@ def _isdir(obj):
         dcm._info(msg)
         return False
 
+#object not type check, normally not called directly
+def _not_isdir(obj):
+    if not _isdir(obj):
+        _bool=' not '
+        msg="object is" + _bool + "a dir: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
+        msg="object is" + _bool + "a dir: " + obj
+        dcm._info(msg)
+        return False
+
 #object type check, normally not called directly
 def _isfile(obj):
     if os.path.isfile(obj):
@@ -47,9 +72,18 @@ def _isfile(obj):
         dcm._info(msg)
         return False
 
-#todo, call below and test existence or lack of it
-#def _dir_exists(obj):
-#def _file_exists
+#object type check, normally not called directly
+def _not_isfile(obj):
+    if not _isfile(obj):
+        _bool=' not '
+        msg="object is" + _bool + "a file: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
+        msg="object is" + _bool + "a file: " + obj
+        dcm._info(msg)
+        return False
 
 #object user owner checks
 def _uid_owns(obj):
@@ -64,6 +98,19 @@ def _uid_owns(obj):
         dcm._info(msg)
         return False
 
+#object user not owner checks
+def _not_uid_owns(obj):
+    if not _uid_owns(obj):
+        _bool=' not '
+        msg="object is" + _bool + "owned by uid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
+        msg="object is" + _bool + "owned by uid: " + obj
+        dcm._info(msg)
+        return False
+
 #object group owner checks
 def _gid_owns(obj):
     if os.stat(obj).st_gid == os.getgid():
@@ -73,6 +120,19 @@ def _gid_owns(obj):
         return True
     else:
         _bool=' not '
+        msg="object is" + _bool + "owned by gid: " + obj
+        dcm._info(msg)
+        return False
+
+#object group not owner checks
+def _not_gid_owns(obj):
+    if not _gid_owns(obj):
+        _bool=' not '
+        msg="object is" + _bool + "owned by gid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
         msg="object is" + _bool + "owned by gid: " + obj
         dcm._info(msg)
         return False
@@ -92,6 +152,18 @@ def _id_owns(obj):
         dcm._info(msg)
         return False
 
-#
-# os.getegid
-# 
+#object user and group not owner checks
+def _not_id_owns(obj):
+    if not _uid_owns(obj) or not _gid_owns(obj):
+        _bool=' not '
+        _junct=' and '
+        msg="object is" + _bool + "owned by uid" + _junct + "gid: " + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool=' '
+        _junct=' or '
+        msg="object is" + _bool + "owned by uid" + _junct + "gid: " + obj
+        dcm._info(msg)
+        return False
+ 

@@ -19,11 +19,11 @@ def _msg_checks():
     print (" basic message test ")
     print ()
 
-    dcm._info("info test text")
-    dcm._pass("pass test text")
-    dcm._warn("warn test text")
-    dcm._fail("fail test text")
-    dcm._halt("halt test text")
+    dcm._info("info test message")
+    dcm._pass("pass test message")
+    dcm._warn("warn test message")
+    dcm._fail("fail test message")
+    dcm._halt("halt test message")
 
     print ()
     print (" blank message test ")
@@ -36,7 +36,7 @@ def _msg_checks():
     dcm._halt("")
 
     print ()
-    print (" no message tests ")
+    print (" null message tests ")
     print ()
 
     dcm._info()
@@ -48,7 +48,7 @@ def _msg_checks():
 
 ## dom module checks
 
-#only check existance
+#only check existence
 def _exists_checks():
     #these are special and should never be called directly
     print ()
@@ -86,7 +86,45 @@ def _exists_checks():
         dcm._fail(msg)
         raise SystemExit
 
-#only check type, existance check is just for us
+#only check not existence
+def _not_exists_checks():
+    #these are special and should never be called directly
+    print ()
+    print (" --- object not existence checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_exists_not'
+
+    if dom._not_exists(testobj):
+        _bool=' not '
+        msg="object does" + _bool + "exist: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' '
+        msg="object does" + _bool + "exist: " + testobj
+        dcm._fail(msg)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_exists'
+
+    if not dom._not_exists(testobj):
+        _bool=' '
+        msg="object does" + _bool + "exist: " + testobj
+        dcm._pass(msg)
+    else:
+        _bool=' not '
+        msg="object does" + _bool + "exist: " + testobj
+        dcm._fail(msg)
+        raise SystemExit
+
+#only check type, existence check is just for us
 def _isdir_checks():
     print ()
     print (" --- dir type checks --- ")
@@ -131,7 +169,52 @@ def _isdir_checks():
         dcm._halt("object is missing: " + testobj)
         raise SystemExit
 
-#only check type, existance check is just for us
+#only check type, existence check is just for us
+def _not_isdir_checks():
+    print ()
+    print (" --- not dir type checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_isdir_not'
+
+    if dom._exists(testobj):
+        if dom._not_isdir(testobj):
+            _bool=' not '
+            msg="object is" + _bool + "a dir: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            msg="object is" + _bool + "a dir: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_isdir'
+
+    if dom._exists(testobj):
+        if not dom._not_isdir(testobj):
+            _bool=' '
+            msg="object is" + _bool + "a dir: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' not '
+            msg="object is" + _bool + "a dir: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#only check type, existence check is just for us
 def _isfile_checks():
     print ()
     print (" --- file type checks --- ")
@@ -176,10 +259,55 @@ def _isfile_checks():
         dcm._halt("object is missing: " + testobj)
         raise SystemExit
 
-#only check uid, existance check is just for us
+#only check type, existence check is just for us
+def _not_isfile_checks():
+    print ()
+    print (" --- not file type checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_isfile_not'
+
+    if dom._exists(testobj):
+        if dom._not_isfile(testobj):
+            _bool=' not '
+            msg="object is" + _bool + "a file: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            msg="object is" + _bool + "a file: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_isfile'
+
+    if dom._exists(testobj):
+        if not dom._not_isfile(testobj):
+            _bool=' '
+            msg="object is" + _bool + "a file: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' not '
+            msg="object is" + _bool + "a file: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#only check uid, existence check is just for us
 def _uid_owns_checks():
     print ()
-    print (" --- object uid checks --- ")
+    print (" --- object uid owns checks --- ")
     print ()
 
     print (" positive check ")
@@ -221,10 +349,55 @@ def _uid_owns_checks():
         dcm._halt("object is missing: " + testobj)
         raise SystemExit
 
-#only check gid, existance check is just for us
+#only check uid, existence check is just for us
+def _not_uid_owns_checks():
+    print ()
+    print (" --- object uid not owns checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_uid_owns_not'
+
+    if dom._exists(testobj):
+        if dom._not_uid_owns(testobj):
+            _bool=' not '
+            msg="object is" + _bool + "owned by uid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            msg="object is" + _bool + "owned by uid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_uid_owns'
+
+    if dom._exists(testobj):
+        if not dom._not_uid_owns(testobj):
+            _bool=' '
+            msg="object is" + _bool + "owned by uid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' not '
+            msg="object is" + _bool + "owned by uid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#only check gid, existence check is just for us
 def _gid_owns_checks():
     print ()
-    print (" --- object gid checks --- ")
+    print (" --- object gid owns checks --- ")
     print ()
 
     print (" positive check ")
@@ -266,10 +439,55 @@ def _gid_owns_checks():
         dcm._halt("object is missing: " + testobj)
         raise SystemExit
 
-#only check id, existance check is just for us
+#only check gid, existence check is just for us
+def _not_gid_owns_checks():
+    print ()
+    print (" --- object gid not owns checks --- ")
+    print ()
+
+    print (" positive check ")
+    print ()
+
+    testobj='test_objects/_gid_owns_not'
+
+    if dom._exists(testobj):
+        if dom._not_gid_owns(testobj):
+            _bool=' not '
+            msg="object is" + _bool + "owned by gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            msg="object is" + _bool + "owned by gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_gid_owns'
+
+    if dom._exists(testobj):
+        if not dom._not_gid_owns(testobj):
+            _bool=' '
+            msg="object is" + _bool + "owned by gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' not '
+            msg="object is" + _bool + "owned by gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#only check id, existence check is just for us
 def _id_owns_checks():
     print ()
-    print (" --- object id checks --- ")
+    print (" --- object id owns checks --- ")
     print ()
 
     print (" positive check ")
@@ -297,7 +515,7 @@ def _id_owns_checks():
     print (" negative checks (uid)")
     print ()
 
-    testobj='test_objects/_uid_owns_not'
+    testobj='test_objects/_id_uid_owns_not'
 
     if dom._exists(testobj):
         if not dom._id_owns(testobj):
@@ -319,7 +537,7 @@ def _id_owns_checks():
     print (" negative checks (gid)")
     print ()
 
-    testobj='test_objects/_gid_owns_not'
+    testobj='test_objects/_id_gid_owns_not'
 
     if dom._exists(testobj):
         if not dom._id_owns(testobj):
@@ -337,18 +555,134 @@ def _id_owns_checks():
         dcm._halt("object is missing: " + testobj)
         raise SystemExit
 
+    print ()
+    print (" negative checks (uid and gid)")
+    print ()
+
+    testobj='test_objects/_id_uid_gid_owns_not'
+
+    if dom._exists(testobj):
+        if not dom._id_owns(testobj):
+            _bool=' not '
+            _junct=' or '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            _junct=' and '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#only check id, existence check is just for us
+def _not_id_owns_checks():
+    print ()
+    print (" --- object id not owns checks --- ")
+    print ()
+
+    print (" positive checks (uid)")
+    print ()
+
+    testobj='test_objects/_id_uid_owns_not'
+
+    if dom._exists(testobj):
+        if dom._not_id_owns(testobj):
+            _bool=' not '
+            _junct=' and '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            _junct=' or '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" positive checks (gid)")
+    print ()
+
+    testobj='test_objects/_id_gid_owns_not'
+
+    if dom._exists(testobj):
+        if dom._not_id_owns(testobj):
+            _bool=' not '
+            _junct=' and '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            _junct=' or '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" positive checks (uid and gid)")
+    print ()
+
+    testobj='test_objects/_id_uid_gid_owns_not'
+
+    if dom._exists(testobj):
+        if dom._not_id_owns(testobj):
+            _bool=' not '
+            _junct=' and '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            _junct=' or '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+    print ()
+    print (" negative check ")
+    print ()
+
+    testobj='test_objects/_id_owns'
+
+    if dom._exists(testobj):
+        if not dom._not_id_owns(testobj):
+            _bool=' '
+            _junct=' or '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' not '
+            _junct=' and '
+            msg="object is" + _bool + "owned by uid" + _junct + "gid: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
 
 ## ddm module checks
 
-def _dir_does_exist_checks():
+#existence checks are incorporated into these tests
+def _dir_exists_checks():
     print ()
-    print (" --- dir exisistance and is a dir checks --- ")
+    print (" --- dir existence and is a dir checks --- ")
     print ()
 
     print (" positive check ")
     print ()
 
-    testobj='test_objects/_dir_does_exst'
+    testobj='test_objects/_dir_exists'
 
     if ddm._dir_does_exist(testobj):
         _bool=' '
@@ -358,12 +692,13 @@ def _dir_does_exist_checks():
         _bool=' not '
         msg="dir does" + _bool + "exist: " + testobj
         dcm._fail(msg)
+        raise SystemExit
 
     print ()
-    print (" negative check ")
+    print (" negative checks (not exists)")
     print ()
 
-    testobj='test_objects/_dir_does_not_exist'
+    testobj='test_objects/_dir_exists_not'
 
     if not ddm._dir_does_exist(testobj):
         _bool=' not '
@@ -373,10 +708,33 @@ def _dir_does_exist_checks():
         _bool=' '
         msg="dir does" + _bool + "exist: " + testobj
         dcm._fail(msg)
+        raise SystemExit
 
+    print ()
+    print (" negative checks (not dir)")
+    print ()
+
+    testobj='test_objects/_dir_isdir_not'
+
+    #existence check is just for us
+    if dom._exists(testobj):
+        if not ddm._dir_does_exist(testobj):
+            _bool=' not '
+            msg="dir does" + _bool + "exist: " + testobj
+            dcm._pass(msg)
+        else:
+            _bool=' '
+            msg="dir does" + _bool + "exist: " + testobj
+            dcm._fail(msg)
+            raise SystemExit
+    else:
+        dcm._halt("object is missing: " + testobj)
+        raise SystemExit
+
+#existence checks are incorporated into these tests
 def _dir_uid_checks():
     print ()
-    print (" --- dir uid checks --- ")
+    print (" --- dir uid owns checks --- ")
     print ()
 
     print (" positive check ")
@@ -410,7 +768,7 @@ def _dir_uid_checks():
 
 def _dir_gid_checks():
     print ()
-    print (" --- dir gid checks --- ")
+    print (" --- dir gid owns checks --- ")
     print ()
 
     print (" positive check ")
@@ -461,11 +819,22 @@ def main():
     print ()
 
     _exists_checks()
+    _not_exists_checks()
+
     _isdir_checks()
+    _not_isdir_checks()
+
     _isfile_checks()
+    _not_isfile_checks()
+
     _uid_owns_checks()
+    _not_uid_owns_checks()
+
     _gid_owns_checks()
+    _not_gid_owns_checks()
+
     _id_owns_checks()
+    _not_id_owns_checks()
 
     print ()
     print ("----------------------------------------")
@@ -474,8 +843,16 @@ def main():
     print ()
 
     _dir_exists_checks()
+    _not_dir_exists_checks()
+
     _uid_owns_dir_checks()
+    _not_uid_owns_dir_checks()
+
     _gid_owns_dir_checks()
+    _not_gid_owns_dir_checks()
+
+    _id_owns_dir_checks()
+    _not_id_owns_dir_checks()
 
     print ()
     print (" --- dir contents checks --- ")
@@ -509,7 +886,7 @@ def main():
     print ()
 
     print ()
-    print (" --- file existance checks --- ")
+    print (" --- file existence checks --- ")
     print ()
 
     testobj=('test_objects/file_does_not_exst')

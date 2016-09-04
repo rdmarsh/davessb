@@ -7,7 +7,7 @@ import os
 import davessb_common_module as dcm
 import davessb_object_module as dom
 
-#object existance checks
+#object existence checks
 def _file_does_exist(pathobj):
     if dom._exists(pathobj):
         dcm._fail("file does exist: " + pathobj)
