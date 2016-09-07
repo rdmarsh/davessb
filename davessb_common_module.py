@@ -13,27 +13,27 @@ class msgends:
     ENDC = '\033[0m'
 
 #messages
-def _info(msg=''):
+def _info(msg = ''):
     print(msgends.INFO + msg + msgends.ENDC)
     if not msg:
         _warn('no text provided for previous INFO message')
 
-def _pass(msg=''):
+def _pass(msg = ''):
     print(msgends.PASS + msg + msgends.ENDC)
     if not msg:
         _warn('no text provided for previous PASS message')
 
-def _warn(msg=''):
+def _warn(msg = ''):
     print(msgends.WARN + msg + msgends.ENDC)
     if not msg:
         _warn('no text provided for previous WARN message')
 
-def _fail(msg=''):
+def _fail(msg = ''):
     print(msgends.FAIL + msg + msgends.ENDC)
     if not msg:
         _warn('no text provided for previous FAIL message')
 
-def _halt(msg=''):
+def _halt(msg = ''):
     print(msgends.HALT + msg + msgends.ENDC)
     if not msg:
         _warn('no text provided for previous HALT message')
