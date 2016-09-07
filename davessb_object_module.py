@@ -156,13 +156,13 @@ def _id_owns(obj):
 def _not_id_owns(obj):
     if not _uid_owns(obj) or not _gid_owns(obj):
         _bool = 'not '
-        _junct = 'and '
+        _junct = 'or '
         msg = "object is " + _bool + "owned by uid " + _junct + _bool + "owned by gid: " + obj
         dcm._info(msg)
         return True
     else:
         _bool = ''
-        _junct = 'or '
+        _junct = 'and '
         msg = "object is " + _bool + "owned by uid " + _junct + _bool + "owned by gid: " + obj
         dcm._info(msg)
         return False
