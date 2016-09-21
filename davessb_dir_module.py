@@ -10,99 +10,144 @@ import davessb_common_module as dcm
 import davessb_object_module as dom
 
 #dir exists and is a correct object checks
-def _dir_exists(pathobj):
-    if (dom._exists(pathobj) and dom._isdir(pathobj)):
+def _dir_exists(obj):
+
+    _objadj = 'dir does '
+    _objvrb = {}
+    _objvrb['exist'] = 'exist '
+    _objvrb['dir'] = 'a dir '
+    _objsep = ': '
+
+    if (dom._exists(obj) and dom._isdir(obj)):
         _bool = ''
-        _junct = 'and '
-        dcm._info("dir does " + _bool + "exist " + _junct + "is " + _bool + "a dir: " + pathobj)
+        _junct = 'and is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['dir'] + _objsep + obj
+        dcm._info(msg)
         return True
     else:
         _bool = 'not '
-        _junct = 'or '
-        dcm._info("dir does " + _bool + "exist " + _junct + "is " + _bool + "a dir: " + pathobj)
+        _junct = 'or is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['dir'] + _objsep + obj
+        dcm._info(msg)
         return False
 
-def _not_dir_exists(pathobj):
-    if not _dir_exists(pathobj):
+
+#dir does not exists or is not a correct object checks
+def _not_dir_exists(obj):
+
+    _objadj = 'dir does '
+    _objvrb = {}
+    _objvrb['exist'] = 'exist '
+    _objvrb['dir'] = 'a dir '
+    _objsep = ': '
+
+    if not (dom._exists(obj) and dom._isdir(obj)):
+        _bool = 'not '
+        _junct = 'or is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['dir'] + _objsep + obj
+        dcm._info(msg)
         return True
     else:
+        _bool = ''
+        _junct = 'and is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['dir'] + _objsep + obj
+        dcm._info(msg)
         return False
 
+#dir does exists and is correct owner checks
+def _uid_does_own_dir(obj):
+
+    _objadj = 'dir does '
+    _objvrb = {}
+    _objvrb['exist'] = 'exist '
+    _objvrb['own'] = 'owned by uid '
+    _objsep = ': '
+
+    if (_dir_exists(obj) and dom._uid_owns(obj)):
+        _bool = ''
+        _junct = 'and is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['own'] + _objsep + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool = 'not '
+        _junct = 'or is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['own'] + _objsep + obj
+        dcm._info(msg)
+        return False
+
+#dir does not exists or is not correct owner checks
+def _uid_does_not_own_dir(obj):
+
+    _objadj = 'dir does '
+    _objvrb = {}
+    _objvrb['exist'] = 'exist '
+    _objvrb['own'] = 'owned by uid '
+    _objsep = ': '
+
+    if not (_dir_exists(obj) and dom._uid_owns(obj)):
+        _bool = 'not '
+        _junct = 'or is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['own'] + _objsep + obj
+        dcm._info(msg)
+        return True
+    else:
+        _bool = ''
+        _junct = 'and is '
+        msg = _objadj + _bool + _objvrb['exist'] + _junct + _bool + _objvrb['own'] + _objsep + obj
+        dcm._info(msg)
+        return False
+
+
+#dave here
 #dir empty checks
-def _dir_is_empty(pathobj):
-    if _dir_exists(pathobj):
-        if not os.listdir(pathobj):
-        #if os.stat(pathobj).st_size == 0:
+def _dir_is_empty(obj):
+    if _dir_exists(obj):
+        if not os.listdir(obj):
+        #if os.stat(obj).st_size == 0:
             _bool = ''
-            dcm._info("dir is" + _bool + "empty: " + pathobj)
+            dcm._info("dir is" + _bool + "empty: " + obj)
             return True
         else:
             _bool = 'not '
-            dcm._warn("dir is" + _bool + "empty: " + pathobj)
+            dcm._warn("dir is" + _bool + "empty: " + obj)
             return False
 
-def _dir_is_not_empty(pathobj):
-    if _dir_exists(pathobj):
-        if os.listdir(pathobj):
-        #if os.stat(pathobj).st_size == 0:
+def _dir_is_not_empty(obj):
+    if _dir_exists(obj):
+        if os.listdir(obj):
+        #if os.stat(obj).st_size == 0:
             _bool = 'not '
-            dcm._info("dir is" + _bool + "empty: " + pathobj)
+            dcm._info("dir is" + _bool + "empty: " + obj)
             return True
         else:
             _bool = ''
-            dcm._warn("dir is" + _bool + "empty: " + pathobj)
+            dcm._warn("dir is" + _bool + "empty: " + obj)
             return False
-
-#dir owner checks
-def _uid_does_own_dir(pathobj):
-    if _dir_exists(pathobj):
-        if dcm._uid_owns(pathobj):
-            _bool = ''
-            dcm._info("uid does " + _bool + "own dir: " + pathobj)
-            return True
-        else:
-            _bool = 'not '
-            dcm._warn("uid does " + _bool + "own dir: " + pathobj)
-            return False
-    else:
-        return False
-
-def _uid_does_not_own_dir(pathobj):
-    if not _uid_does_own_dir(pathobj):
-        if not dom._uid_owns(pathobj):
-            _bool = 'not '
-            dcm._info("uid does " + _bool + "own dir: " + pathobj)
-            return True
-        else:
-            _bool = ''
-            dcm._warn("uid does " + _bool + "own dir: " + pathobj)
-            return False
-    else:
-        return False
 
 #dir group checks
-def _gid_does_own_dir(pathobj):
-    if _dir_exists(pathobj):
-        if dom._gid_owns(pathobj):
+def _gid_does_own_dir(obj):
+    if _dir_exists(obj):
+        if dom._gid_owns(obj):
             _bool = ''
-            dcm._info("gid does " + _bool + "own dir: " + pathobj)
+            dcm._info("gid does " + _bool + "own dir: " + obj)
             return True
         else:
             _bool = 'not '
-            dcm._warn("gid does " + _bool + "own dir: " + pathobj)
+            dcm._warn("gid does " + _bool + "own dir: " + obj)
             return False
     else:
         return False
 
-def _gid_does_not_own_dir(pathobj):
-    if _dir_exists(pathobj):
-        if not dom._gid_owns(pathobj):
+def _gid_does_not_own_dir(obj):
+    if _dir_exists(obj):
+        if not dom._gid_owns(obj):
             _bool = 'not '
-            dcm._info("gid does " + _bool + "own dir: " + pathobj)
+            dcm._info("gid does " + _bool + "own dir: " + obj)
             return True
         else:
             _bool = ''
-            dcm._warn("gid does " + _bool + "own dir: " + pathobj)
+            dcm._warn("gid does " + _bool + "own dir: " + obj)
             return False
     else:
         return False
